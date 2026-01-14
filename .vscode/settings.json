@@ -7,6 +7,7 @@
     "powershell.codeFormatting.preset": "Allman",
     "cSpell.words": [
         "-AsHashtable",
+        "Allman",
         "apng",
         "APPTERMINATION_RECEIVED",
         "AsHashtable",
@@ -41,6 +42,7 @@
         "netstandard",
         "NO_APPLICABLE_DISPLAYCATALOG_PACKAGE",
         "NO_APPLICABLE_SFSCLIENT_PACKAGE",
+        "OTBS",
         "psadt",
         "psappdeploytoolkit",
         "psyml",
@@ -58,6 +60,7 @@
         "scriptblocks",
         "SFSCLIENT_API_FAILED",
         "SHELLEXEC_INSTALL_FAILED",
+        "Stroustrup",
         "UNSUPPORTED_MANIFESTVERSION",
         "UNSUPPORTED_RESTSOURCE",
         "VSTOR",
