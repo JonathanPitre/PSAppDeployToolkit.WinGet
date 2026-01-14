@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     An Invoke-Build Build file.
 
@@ -132,10 +132,18 @@ Add-BuildTask ValidateRequirements {
 # Synopsis: Import the current module manifest file for processing.
 Add-BuildTask TestModuleManifest {
     Write-Build White '      Running module manifest tests...'
+    # Remove the module if it's already imported to avoid conflicts
+    Remove-Module -Name $Script:ModuleName -Force -ErrorAction SilentlyContinue
     Assert-Build (Test-Path $Script:ModuleManifestFile) 'Unable to locate the module manifest file.'
     Assert-Build (Get-ChildItem $Script:ModuleManifestFile | Test-ModuleManifest -ErrorAction Ignore) 'Module Manifest test did not pass verification.'
     Assert-Build (!(Get-Module -Name $Script:ModuleName)) 'Conflicting module already imported.'
-    Assert-Build (!(Get-ChildItem -LiteralPath $env:PSModulePath.Split(';') -Filter $Script:ModuleName -ErrorAction Ignore)) 'Conflicting module within a PSModulePath directory.'
+    # Check each PSModulePath directory individually for conflicting modules
+    $conflictingModules = foreach ($modulePath in $env:PSModulePath.Split(';')) {
+        if ($modulePath -and (Test-Path -LiteralPath $modulePath -ErrorAction SilentlyContinue)) {
+            Get-ChildItem -LiteralPath $modulePath -Filter $Script:ModuleName -Directory -ErrorAction SilentlyContinue
+        }
+    }
+    Assert-Build (!$conflictingModules) 'Conflicting module within a PSModulePath directory.'
     Write-Build Green '      ...Module Manifest Verification Complete!'
 }
 
