@@ -7,8 +7,10 @@
     "powershell.codeFormatting.preset": "Allman",
     "cSpell.words": [
         "-AsHashtable",
+        "apng",
         "APPTERMINATION_RECEIVED",
         "AsHashtable",
+        "bbwe",
         "Burak",
         "CANNOT_WRITE_TO_UPLEVEL_INDEX",
         "configmgr",
@@ -29,6 +31,7 @@
         "mscorlib",
         "msiexec",
         "Msix",
+        "msixbundle",
         "msstore",
         "MSVC",
         "MSVCRT",
@@ -49,8 +52,8 @@
         "RESTSOURCE_INVALID_URL",
         "RESTSOURCE_INVALID_VERSION",
         "Richters",
-        "saiwParams",
         "runspace",
+        "saiwParams",
         "SCCM",
         "scriptblocks",
         "SFSCLIENT_API_FAILED",
@@ -58,6 +61,8 @@
         "UNSUPPORTED_MANIFESTVERSION",
         "UNSUPPORTED_RESTSOURCE",
         "VSTOR",
+        "webp",
+        "wekyb",
         "winget"
     ]
 }
