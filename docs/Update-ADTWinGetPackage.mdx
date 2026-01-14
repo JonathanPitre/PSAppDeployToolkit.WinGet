@@ -16,7 +16,8 @@ Update-ADTWinGetPackage [[-Query] <String>] [-MatchOption <String>] [-AllowHashM
  [-Architecture <String>] [-Custom <String>] [-Force] [-Header <String>] [-Id <String>] [-IncludeUnknown]
  [-InstallerType <String>] [-Locale <String>] [-Location <String>] [-Log <String>] [-Mode <String>]
  [-Moniker <String>] [-Name <String>] [-Override <String>] [-Scope <String>] [-SkipDependencies]
- [-Source <String>] [-Version <String>] [-UninstallPrevious] [-DebugHashMismatch] [-PassThru] [<CommonParameters>]
+ [-Source <String>] [-Version <String>] [-UninstallPrevious] [-DebugHashMismatch] [-PassThru]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,6 +56,14 @@ Update-ADTWinGetPackage Microsoft.PowerShell -Version 7.4.4.0
 This example shows how to update a specific version of a package using a query.
 The command does a query search for packages matching `Microsoft.PowerShell`.
 The results of the search a limited to matches with the version of `7.4.4.0`.
+
+### EXAMPLE 4
+
+```powershell
+Update-ADTWinGetPackage -Id Microsoft.PowerShell -UninstallPrevious
+```
+
+This example shows how to update a package while uninstalling the previous version first.
 
 ## PARAMETERS
 
@@ -462,7 +471,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable, -Verbose, -WarningAction, -WarningVariable, and -ProgressAction.  For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

@@ -14,7 +14,7 @@ Uninstalls a WinGet Package.
 ```powershell
 Uninstall-ADTWinGetPackage [[-Query] <String>] [-MatchOption <String>] [-Force] [-Id <String>] [-Log <String>]
  [-Mode <String>] [-Moniker <String>] [-Name <String>] [-Scope <String>] [-Source <String>] [-Version <String>]
- [-PassThru] [<CommonParameters>]
+ [-AllVersions] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,6 +52,14 @@ Uninstall-ADTWinGetPackage Microsoft.PowerShell -Version 7.4.4.0
 This example shows how to uninstall a specific version of a package using a query.
 The command does a query search for packages matching `Microsoft.PowerShell`.
 The results of the search a limited to matches with the version of `7.4.4.0`.
+
+### EXAMPLE 4
+
+```powershell
+Uninstall-ADTWinGetPackage -Id Microsoft.PowerShell -AllVersions
+```
+
+This example shows how to uninstall all installed versions of a package by specifying the package identifier with the AllVersions switch.
 
 ## PARAMETERS
 
@@ -236,6 +244,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -AllVersions
+
+Use this parameter to uninstall all installed versions of a package.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -PassThru
 
 Returns an object detailing the operation, just as Microsoft's module does by default.
@@ -254,7 +278,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable, -Verbose, -WarningAction, -WarningVariable, and -ProgressAction.  For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
