@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     An Invoke-Build Build file.
 
@@ -138,8 +138,10 @@ Add-BuildTask TestModuleManifest {
     Assert-Build (Get-ChildItem $Script:ModuleManifestFile | Test-ModuleManifest -ErrorAction Ignore) 'Module Manifest test did not pass verification.'
     Assert-Build (!(Get-Module -Name $Script:ModuleName)) 'Conflicting module already imported.'
     # Check each PSModulePath directory individually for conflicting modules
-    $conflictingModules = foreach ($modulePath in $env:PSModulePath.Split(';')) {
-        if ($modulePath -and (Test-Path -LiteralPath $modulePath -ErrorAction SilentlyContinue)) {
+    $conflictingModules = foreach ($modulePath in $env:PSModulePath.Split(';'))
+    {
+        if ($modulePath -and (Test-Path -LiteralPath $modulePath -ErrorAction SilentlyContinue))
+        {
             Get-ChildItem -LiteralPath $modulePath -Filter $Script:ModuleName -Directory -ErrorAction SilentlyContinue
         }
     }
