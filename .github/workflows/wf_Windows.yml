@@ -9,12 +9,12 @@ name: PSAppDeployToolkit.WinGet-Windows-PowerShell
 on:
   pull_request:
     paths-ignore:
-      - '**.md'
-      - 'docs/**'
+      - "**.md"
+      - "docs/**"
   push:
     paths-ignore:
-      - '**.md'
-      - 'docs/**'
+      - "**.md"
+      - "docs/**"
 jobs:
   test:
     name: Run Tests
@@ -22,52 +22,52 @@ jobs:
     strategy:
       matrix:
         powershell:
-          - '5.1'
-          - '7.0'
+          - "5.1"
+          - "7.5.4"
       fail-fast: false
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v4
-    - name: Display the path
-      shell: powershell
-      run: echo ${env:PATH}
-    - name: Version Display
-      shell: powershell
-      run: $PSVersionTable
-    # uncomment below to explore what modules/variables/env variables are available in the build image
-    # - name: Modules and Variables Display
-    #   shell: powershell
-    #   run: Get-Module -ListAvailable; (Get-Variable).GetEnumerator() | Sort-Object Name | Out-String; (Get-ChildItem env:*).GetEnumerator() | Sort-Object Name | Out-String
-    - name: NuGet Latest
-      shell: powershell
-      run: Install-PackageProvider -Name "NuGet" -Confirm:$false -Force -Verbose
-    - name: PowerShellGet Latest
-      shell: powershell
-      run: Install-Module -Name PowerShellGet -Repository PSGallery -Force
-    - name: Bootstrap
-      shell: powershell
-      run: ./actions_bootstrap.ps1
-    - name: Test and Build
-      shell: powershell
-      run: Invoke-Build -File .\src\PSAppDeployToolkit.WinGet.build.ps1
-    - name: Upload pester results
-      uses: actions/upload-artifact@v4
-      with:
-        name: pester-results
-        path: .\src\Artifacts\testOutput
-        if-no-files-found: error
-        overwrite: true
-    - name: Upload code coverage results
-      uses: actions/upload-artifact@v4
-      with:
-        name: cc-results
-        path: .\src\Artifacts\ccReport
-        if-no-files-found: error
-        overwrite: true
-    - name: Upload module
-      uses: actions/upload-artifact@v4
-      with:
-        name: PSAppDeployToolkit.WinGet
-        path: .\src\Artifacts\Module
-        if-no-files-found: error
-        overwrite: true
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Display the path
+        shell: powershell
+        run: echo ${env:PATH}
+      - name: Version Display
+        shell: powershell
+        run: $PSVersionTable
+      # uncomment below to explore what modules/variables/env variables are available in the build image
+      # - name: Modules and Variables Display
+      #   shell: powershell
+      #   run: Get-Module -ListAvailable; (Get-Variable).GetEnumerator() | Sort-Object Name | Out-String; (Get-ChildItem env:*).GetEnumerator() | Sort-Object Name | Out-String
+      - name: NuGet Latest
+        shell: powershell
+        run: Install-PackageProvider -Name "NuGet" -Confirm:$false -Force -Verbose
+      - name: PowerShellGet Latest
+        shell: powershell
+        run: Install-Module -Name PowerShellGet -Repository PSGallery -Force
+      - name: Bootstrap
+        shell: powershell
+        run: ./actions_bootstrap.ps1
+      - name: Test and Build
+        shell: powershell
+        run: Invoke-Build -File .\src\PSAppDeployToolkit.WinGet.build.ps1
+      - name: Upload pester results
+        uses: actions/upload-artifact@v4
+        with:
+          name: pester-results
+          path: .\src\Artifacts\testOutput
+          if-no-files-found: error
+          overwrite: true
+      - name: Upload code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: cc-results
+          path: .\src\Artifacts\ccReport
+          if-no-files-found: error
+          overwrite: true
+      - name: Upload module
+        uses: actions/upload-artifact@v4
+        with:
+          name: PSAppDeployToolkit.WinGet
+          path: .\src\Artifacts\Module
+          if-no-files-found: error
+          overwrite: true
