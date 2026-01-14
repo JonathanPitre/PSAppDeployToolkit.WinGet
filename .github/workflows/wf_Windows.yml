@@ -20,6 +20,10 @@ jobs:
     name: Run Tests
     runs-on: windows-latest
     strategy:
+      matrix:
+        powershell:
+          - '5.1'
+          - '7.0'
       fail-fast: false
     steps:
     - name: Check out repository
