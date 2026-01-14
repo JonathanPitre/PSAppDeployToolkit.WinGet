@@ -249,10 +249,10 @@ function Invoke-ADTWinGetDeploymentOperation
         if (!$PSBoundParameters.ContainsKey('Id') -and !$PSBoundParameters.ContainsKey('Name') -and !$PSBoundParameters.ContainsKey('Moniker'))
         {
             $naerParams = @{
-                Exception = [System.ArgumentException]::new("Please specify a package by Id, Name, or Moniker.")
-                Category = [System.Management.Automation.ErrorCategory]::InvalidArgument
-                ErrorId = "WinGet$([System.Globalization.CultureInfo]::CurrentUICulture.TextInfo.ToTitleCase($Action))FilterError"
-                TargetObject = $PSBoundParameters
+                Exception         = [System.ArgumentException]::new("Please specify a package by Id, Name, or Moniker.")
+                Category          = [System.Management.Automation.ErrorCategory]::InvalidArgument
+                ErrorId           = "WinGet$([System.Globalization.CultureInfo]::CurrentUICulture.TextInfo.ToTitleCase($Action))FilterError"
+                TargetObject      = $PSBoundParameters
                 RecommendedAction = "Please specify a package by Id, Name, or Moniker; then try again."
             }
             $PSCmdlet.ThrowTerminatingError((New-ADTErrorRecord @naerParams))
@@ -329,11 +329,11 @@ function Invoke-ADTWinGetDeploymentOperation
             {
                 '^System'
                 {
-                    $PSBoundParameters.Scope = 'Machine'
+                    $PSBoundParameters.Scope = 'machine'
                 }
                 '^User'
                 {
-                    $PSBoundParameters.Scope = 'User'
+                    $PSBoundParameters.Scope = 'user'
                 }
                 default
                 {
@@ -345,15 +345,15 @@ function Invoke-ADTWinGetDeploymentOperation
         }
         elseif (($wgPackage.PSObject.Properties.Name.Contains('Source') -and !$wgPackage.Source.Equals('msstore')) -or ($PSBoundParameters.ContainsKey('Source') -and ($PSBoundParameters.Source -ne 'msstore')))
         {
-            $PSBoundParameters.Add('Scope', 'Machine')
+            $PSBoundParameters.Add('Scope', 'machine')
         }
 
         # Generate action lookup table for verbiage.
         $actionTranslator = @{
-            Install = 'Installer'
-            Repair = 'Repair'
+            Install   = 'Installer'
+            Repair    = 'Repair'
             Uninstall = 'Uninstaller'
-            Upgrade = 'Installer'
+            Upgrade   = 'Installer'
         }
     }
 
@@ -406,10 +406,10 @@ function Invoke-ADTWinGetDeploymentOperation
             # Set up arguments to pass to Start-Process.
             $spParams = @{
                 WorkingDirectory = $ExecutionContext.SessionState.Path.CurrentLocation.Path
-                ArgumentList = Get-ADTWinGetHashMismatchArgumentList @wgAppInfo -LogFile $PSBoundParameters.Log
-                FilePath = $(if ($wgAppInfo.FilePath.EndsWith('msi')) { 'msiexec.exe' } else { $wgAppInfo.FilePath })
-                PassThru = $true
-                Wait = $true
+                ArgumentList     = Get-ADTWinGetHashMismatchArgumentList @wgAppInfo -LogFile $PSBoundParameters.Log
+                FilePath         = $(if ($wgAppInfo.FilePath.EndsWith('msi')) { 'msiexec.exe' } else { $wgAppInfo.FilePath })
+                PassThru         = $true
+                Wait             = $true
             }
 
             # Commence installation and test the resulting exit code for success.
@@ -458,13 +458,13 @@ function Invoke-ADTWinGetDeploymentOperation
 
         # Generate the WinGet result. We do this here so we can add it to the ErrorRecord's TargetObject if we're going to throw.
         $wingetResult = [PSCustomObject]@{
-            Id = $wgPackage.Id
-            Name = $wgPackage.Name
-            Source = if ($PSBoundParameters.ContainsKey('Source')) { $Source } else { $wgPackage | Select-Object -ExpandProperty Source -ErrorAction Ignore }
-            CorrelationData = [System.String]::Empty
-            ExtendedErrorCode = $null
-            RebootRequired = $Global:LASTEXITCODE.Equals(1641) -or ($Global:LASTEXITCODE.Equals(3010))
-            Status = if ($wingetException) { "$($Action)Error" } else { 'Ok' }
+            Id                                      = $wgPackage.Id
+            Name                                    = $wgPackage.Name
+            Source                                  = if ($PSBoundParameters.ContainsKey('Source')) { $Source } else { $wgPackage | Select-Object -ExpandProperty Source -ErrorAction Ignore }
+            CorrelationData                         = [System.String]::Empty
+            ExtendedErrorCode                       = $null
+            RebootRequired                          = $Global:LASTEXITCODE.Equals(1641) -or ($Global:LASTEXITCODE.Equals(3010))
+            Status                                  = if ($wingetException) { "$($Action)Error" } else { 'Ok' }
             "$($actionTranslator.$Action)ErrorCode" = $wingetExitCode
         }
 
@@ -472,11 +472,11 @@ function Invoke-ADTWinGetDeploymentOperation
         if ($wingetException)
         {
             $naerParams = @{
-                Exception = $wingetException
-                Activity = (Get-PSCallStack)[1].Command
-                Category = [System.Management.Automation.ErrorCategory]::InvalidResult
-                ErrorId = "WinGetPackage$([System.Globalization.CultureInfo]::CurrentUICulture.TextInfo.ToTitleCase($Action))Failure"
-                TargetObject = [PSCustomObject]@{ Result = $wingetResult; Output = $wingetOutput }
+                Exception         = $wingetException
+                Activity          = (Get-PSCallStack)[1].Command
+                Category          = [System.Management.Automation.ErrorCategory]::InvalidResult
+                ErrorId           = "WinGetPackage$([System.Globalization.CultureInfo]::CurrentUICulture.TextInfo.ToTitleCase($Action))Failure"
+                TargetObject      = [PSCustomObject]@{ Result = $wingetResult; Output = $wingetOutput }
                 RecommendedAction = "Please review the exit code, then try again."
             }
             $wingetResult.ExtendedErrorCode = New-ADTErrorRecord @naerParams
