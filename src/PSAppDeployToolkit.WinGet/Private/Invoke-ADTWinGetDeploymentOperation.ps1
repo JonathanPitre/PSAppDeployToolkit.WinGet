@@ -321,7 +321,7 @@ function Invoke-ADTWinGetDeploymentOperation
             }
         }
 
-        # Translate the provided scope argument, otherwise fefault the scope to "Machine" for the safety of users.
+        # Translate the provided scope argument, otherwise default the scope to "Machine" for the safety of users.
         # It's super easy to install user-scoped apps into the SYSTEM user's account, and it's painful to diagnose/clean up.
         if (($callerScope = if ($PSBoundParameters.ContainsKey('Scope')) { $PSBoundParameters.Scope }))
         {
@@ -348,7 +348,7 @@ function Invoke-ADTWinGetDeploymentOperation
             $PSBoundParameters.Add('Scope', 'Machine')
         }
 
-        # Generate action lookup table for verbage.
+        # Generate action lookup table for verbiage.
         $actionTranslator = @{
             Install = 'Installer'
             Repair = 'Repair'
@@ -457,7 +457,7 @@ function Invoke-ADTWinGetDeploymentOperation
         }
 
         # Generate the WinGet result. We do this here so we can add it to the ErrorRecord's TargetObject if we're going to throw.
-        $wingetResult = [pscustomobject]@{
+        $wingetResult = [PSCustomObject]@{
             Id = $wgPackage.Id
             Name = $wgPackage.Name
             Source = if ($PSBoundParameters.ContainsKey('Source')) { $Source } else { $wgPackage | Select-Object -ExpandProperty Source -ErrorAction Ignore }
@@ -476,7 +476,7 @@ function Invoke-ADTWinGetDeploymentOperation
                 Activity = (Get-PSCallStack)[1].Command
                 Category = [System.Management.Automation.ErrorCategory]::InvalidResult
                 ErrorId = "WinGetPackage$([System.Globalization.CultureInfo]::CurrentUICulture.TextInfo.ToTitleCase($Action))Failure"
-                TargetObject = [pscustomobject]@{ Result = $wingetResult; Output = $wingetOutput }
+                TargetObject = [PSCustomObject]@{ Result = $wingetResult; Output = $wingetOutput }
                 RecommendedAction = "Please review the exit code, then try again."
             }
             $wingetResult.ExtendedErrorCode = New-ADTErrorRecord @naerParams

@@ -197,7 +197,7 @@ Key: value2
         <dev:code>PS &gt; Get-Date | Select-Object -Property * | ConvertTo-Yaml | ConvertFrom-Yaml
 
 DisplayHint : DateTime
-DateTime    : poniedziałek, 14 grudnia 2020 22:10:03
+DateTime    : Monday, 14 December 2020 22:10:03
 Date        : 2020-12-14T00:00:00.0000000+01:00
 Day         : 14
 DayOfWeek   : Monday

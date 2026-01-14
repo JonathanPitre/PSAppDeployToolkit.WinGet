@@ -18,7 +18,7 @@ More people ask for WinGet support in PSAppDeployToolkit than any other feature,
 
 ### Via `Invoke-AppDeployToolkit.ps1` Deployment Script
 
-#### Downloading the module.
+#### Downloading the module
 
 1. Download the latest release from our [Releases](https://github.com/mjr4077au/PSAppDeployToolkit.WinGet/releases) page.
 2. Copy the `PSAppDeployToolkit.WinGet` folder into your deployment script directory for `Invoke-AppDeployToolkit.ps1` to automatically import.
@@ -34,6 +34,7 @@ More people ask for WinGet support in PSAppDeployToolkit than any other feature,
 ```PowerShell
 PS C:\> Install-Module -Name PSAppDeployToolkit.WinGet
 ```
+
 Installs this PowerShell module from the PSGallery.
 
 #### Importing the module
@@ -41,13 +42,14 @@ Installs this PowerShell module from the PSGallery.
 ```PowerShell
 PS C:\> Import-Module -Name PSAppDeployToolkit.WinGet
 ```
+
 Imports this installed PowerShell module into your current runspace.
 
 ## Using the Module
 
 Below are some quick commands to get you started. Full documentation for all commands within this module is available in the [docs](/docs) folder.
 
-### Repairing WinGet (making sure it's preprovisioned properly)
+### Repairing WinGet (making sure it's provisioned properly)
 
 ```PowerShell
 PS C:\> Repair-ADTWinGetPackageManager -Verbose
@@ -59,6 +61,7 @@ VERBOSE: [2024-12-21T11:06:14.4408419+11:00] [Repair-ADTWinGetPackageManager] ::
 VERBOSE: [2024-12-21T11:06:14.4503599+11:00] [Repair-ADTWinGetPackageManager] :: Testing whether the installed WinGet is version [1.7.10582] or higher, please wait...
 VERBOSE: [2024-12-21T11:06:14.8096028+11:00] [Repair-ADTWinGetPackageManager] :: Successfully confirmed WinGet version [1.9.25200] is installed on system.
 ```
+
 Ensures that WinGet is pre-provisioned on the system, the required Visual Studio Runtime libraries are available, and WinGet is above the module's minimum required version.
 
 ### Installing Microsoft Visual Studio Tools for Office
@@ -86,6 +89,7 @@ RebootRequired     : False
 Status             : Ok
 InstallerErrorCode : 0
 ```
+
 Installs the package with Id `Microsoft.VSTOR` onto the computer.
 
 ### Detecting/confirming Microsoft Visual Studio Tools for Office is installed
@@ -100,6 +104,7 @@ Name                                                        Id              Vers
 ----                                                        --              -------    ------
 Microsoft Visual Studio 2010 Tools for Office Runtime (x64) Microsoft.VSTOR 10.0.60917 winget
 ```
+
 Returns an object of the installed package with Id `Microsoft.VSTOR` on this computer.
 
 ### Uninstalling Microsoft Visual Studio Tools for Office
@@ -123,6 +128,7 @@ RebootRequired       : False
 Status               : Ok
 UninstallerErrorCode : 0
 ```
+
 Uninstalls the package with Id `Microsoft.VSTOR` from the computer.
 
 ### Performing a full deployment of Microsoft Visual Studio Tools for Office
@@ -183,6 +189,7 @@ PS C:\> Invoke-ADTWinGetOperation -Id Microsoft.VSTOR -DeployMode Silent
 [2024-12-20 15:05:28.728] [Finalization] [Close-ADTSession] [Success] :: [MicrosoftVisualStudio2010ToolsforOfficeRuntime_10.0.60917] install completed with exit code [0].
 [2024-12-20 15:05:28.731] [Finalization] [Close-ADTSession] [Info] :: *******************************************************************************
 ```
+
 Instantiates a complete PSAppDeployToolkit deployment session, and installs package with Id `Microsoft.VSTOR` onto the computer.
 
 ## Compiling the module from source
@@ -202,4 +209,3 @@ From PowerShell, run `Import-Module -Name .\src\Artifacts\Module\PSAppDeployTool
 ## Author
 
 Mitch Richters
-

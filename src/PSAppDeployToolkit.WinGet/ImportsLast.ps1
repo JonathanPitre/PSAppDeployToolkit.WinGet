@@ -4,10 +4,10 @@
 #
 #-----------------------------------------------------------------------------
 
-# Rethrowing caught exceptions makes the error output from Import-Module look better.
+# Re-throwing caught exceptions makes the error output from Import-Module look better.
 try
 {
-    # Set all functions as read-only, export all public definitions and finalise the CommandTable.
+    # Set all functions as read-only, export all public definitions and finalize the CommandTable.
     Set-Item -LiteralPath $FunctionPaths -Options ReadOnly
     Get-Item -LiteralPath $FunctionPaths | & { process { $CommandTable.Add($_.Name, $_) } }
     New-Variable -Name CommandTable -Value ([System.Collections.ObjectModel.ReadOnlyDictionary[System.String, System.Management.Automation.CommandInfo]]::new($CommandTable)) -Option Constant -Force -Confirm:$false
@@ -17,7 +17,7 @@ try
     $currentWindowsIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
     try
     {
-        New-Variable -Name ADT -Option Constant -Value ([pscustomobject]@{
+        New-Variable -Name ADT -Option Constant -Value ([PSCustomObject]@{
                 WinGetMinVersion = [System.Version]::new(1, 10, 390)
                 RunningAsSystem = $currentWindowsIdentity.User.IsWellKnown([System.Security.Principal.WellKnownSidType]::LocalSystemSid)
                 RunningAsAdmin = Test-ADTCallerIsAdmin

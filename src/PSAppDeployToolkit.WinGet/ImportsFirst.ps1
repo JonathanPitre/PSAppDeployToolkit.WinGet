@@ -68,7 +68,7 @@ if (!([System.Environment]::StackTrace.Split("`n") -like '*Microsoft.PowerShell.
     )
 }
 
-# Rethrowing caught exceptions makes the error output from Import-Module look better.
+# Re-throwing caught exceptions makes the error output from Import-Module look better.
 try
 {
     # Set up lookup table for all cmdlets used within module, using PSAppDeployToolkit's as a basis.
@@ -81,7 +81,7 @@ try
             @{ ModuleName = "$PSScriptRoot\Submodules\psyml"; Guid = 'a88e2e67-a937-4d98-a4d3-0b03d3ade169'; ModuleVersion = '1.0.0' }
         )
 
-        # Handle the Appx module differently due to PowerShell 7 shenanighans. https://github.com/PowerShell/PowerShell/issues/13138
+        # Handle the Appx module differently due to PowerShell 7 shenanigans. https://github.com/PowerShell/PowerShell/issues/13138
         if ($PSEdition.Equals('Core'))
         {
             try
