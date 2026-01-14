@@ -215,7 +215,7 @@ function Install-ADTWinGetPackage
 
     process
     {
-        # Initialise variables before proceeding.
+        # Initialize variables before proceeding.
         $wingetResult = $null
         try
         {

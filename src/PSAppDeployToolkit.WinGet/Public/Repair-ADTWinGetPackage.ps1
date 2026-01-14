@@ -121,7 +121,7 @@ function Repair-ADTWinGetPackage
 
     process
     {
-        # Initialise variables before proceeding.
+        # Initialize variables before proceeding.
         $wingetResult = $null
         try
         {
