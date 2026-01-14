@@ -1,7 +1,7 @@
 ﻿#
 # Module manifest for module 'PSAppDeployToolkit.WinGet'
 #
-# Generated on: 2024-11-29
+# Generated on: 2026-01-14
 #
 
 @{
@@ -9,7 +9,7 @@
     RootModule = 'PSAppDeployToolkit.WinGet.psm1'
 
     # Version number of this module.
-    ModuleVersion = '1.0.5'
+    ModuleVersion = '1.0.6'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -24,7 +24,7 @@
     # CompanyName = ''
 
     # Copyright statement for this module
-    Copyright = '(c) 2024 Mitch Richters. All rights reserved.'
+    Copyright = '(c) 2026 Mitch Richters. All rights reserved.'
 
     # Description of the functionality provided by this module
     Description = 'A PSAppDeployToolkit v4 extension module for WinGet.'

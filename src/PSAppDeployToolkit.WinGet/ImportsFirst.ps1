@@ -6,12 +6,12 @@ PSAppDeployToolkit.WinGet - This module script a basic scaffold to use with PSAp
 .DESCRIPTION
 This module can be directly imported from the command line via Import-Module, but it is usually imported by the Invoke-AppDeployToolkit.ps1 script.
 
-PSAppDeployToolkit is licensed under the BSD 3-Clause License - Copyright (C) 2024 Mitch Richters. All rights reserved.
+PSAppDeployToolkit is licensed under the BSD 3-Clause License - Copyright (C) 2026 Mitch Richters. All rights reserved.
 
 .NOTES
 BSD 3-Clause License
 
-Copyright (c) 2024, Mitch Richters
+Copyright (c) 2026, Mitch Richters
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
